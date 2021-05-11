@@ -1,0 +1,47 @@
+.message {
+   padding: 20px;
+   position: absolute;
+   top: 90%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   background: #fefefe;
+   cursor: pointer;
+   font-size: 14px;
+   border: 1px solid white;
+   z-index: 15;
+
+   font-family: "Poppins";
+}
+#stage-cover {
+   width: 100vw;
+   height: 100vh;
+   /* filter: blur(20px);
+   transform: scale(1.1);
+   overflow: -moz-hidden-unscrollable !important;
+   overflow: hidden !important; */
+}
+
+/* .stage {
+   width: 100vw;
+   height: 100vh;
+   overflow: -moz-hidden-unscrollable !important;
+   overflow: hidden !important;
+} */
+/* .gnzxdn {
+   width: 100vw;
+   height: 100vh;
+   display: -webkit-box;
+   display: -webkit-flex;
+   display: -ms-flexbox;
+   display: flex;
+   -webkit-box-pack: center;
+   -webkit-justify-content: center;
+   -ms-flex-pack: center;
+   justify-content: center;
+   place-items: center;
+   z-index: 10;
+   position: absolute;
+   top: 0;
+   left: 0;
+   background: none;
+} */
