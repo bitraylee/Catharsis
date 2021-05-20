@@ -5,12 +5,14 @@ function QuoteCard() {
    const CardComponent= styled.div`
       width:60vw;
       height:60vh;
+      max-height:448px;
       border-radius: 20px;
       display:flex;
       justify-content:center;
       place-items:center;
 
-      background-color:rgba(255,255,255,0.15);
+      background-color:rgba(255,255,255,0.05);
+      margin-bottom:20px;
    `;
    const TextContent= styled.p`
       font-family: 'Poppins';
