@@ -174,8 +174,17 @@
 
       init = function () {
          initGestures();
-         message = $(".play-pause");
-         message.on("click", play);
+         initAudio();
+
+         message = document.querySelector(".play-pause");
+         message.addEventListener("click", () => {
+            if (isPlaying) {
+               pause();
+            } else {
+               play();
+            }
+         });
+
          resize();
          build();
          resize();
@@ -187,10 +196,10 @@
       };
 
       play = function () {
-         if (isPlaying) {
-            return;
-         }
-         initAudio();
+         // if (isPlaying) {
+         //    return;
+         // }
+
          // message.css("cursor", "default");
          // if (canplay) {
          //    message.hide();
@@ -199,6 +208,10 @@
          // }
          audio.play();
          return (isPlaying = true);
+      };
+      pause = function () {
+         audio.pause();
+         return (isPlaying = false);
       };
 
       initGUI = function () {
@@ -223,7 +236,7 @@
       };
 
       initAudio = function () {
-         setFlag = false;
+         // setFlag = false;
          var context, source;
          context = new (window.AudioContext || window.webkitAudioContext)();
          analyser = context.createAnalyser();
@@ -232,6 +245,9 @@
          audio = new Audio();
          audio.crossOrigin = "anonymous";
          audio.src = AUDIO_URL;
+
+         console.log(audio);
+
          return audio.addEventListener("canplay", function () {
             var bufferLength;
             // if (isPlaying) {
