@@ -1,0 +1,19 @@
+.message {
+   padding: 20px;
+   position: absolute;
+   top: 90%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   background: #fefefe;
+   cursor: pointer;
+   font-size: 14px;
+   border: 1px solid white;
+   z-index: 15;
+
+   font-family: "Poppins";
+}
+#stage-cover {
+   width: 100vw;
+   height: 100vh;
+   z-index: -1;
+}
