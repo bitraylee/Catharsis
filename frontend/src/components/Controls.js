@@ -4,18 +4,60 @@ import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay, faPause, faStepBackward, faStepForward, faList } from '@fortawesome/free-solid-svg-icons'
 import { icon } from '@fortawesome/fontawesome-svg-core';
+import { TilingSprite } from '@pixi/sprite-tiling';
+import { findRenderedDOMComponentWithClass } from 'react-dom/test-utils';
 
 export default class controls extends Component {
-   constructor(){
-      super();
+   constructor(props){
+      super(props);
+      
       this.state={
-         isPlaying: false
+         isPlaying: false,
+         currentIndex:0,
+         currentSong:this.props.trackList.trackList[0],
+         // nextSong:this.props.trackList.trackList[2],
+         // prevSong:this.props.trackList.trackList[0]
       };
       this.changeButton=this.changeButton.bind(this);
-
-      
+      this.SkipSong=this.SkipSong.bind(this);
+      // this.updateMeta=this.updateMeta.bind(this);
+      // this.start=this.start.bind(this);
    }
-   
+   // SkipSong(){
+   //    console.log(this.props.trackList.trackList);
+   // }
+   // updateMeta(){
+   //    console.log("update  Meta");
+   // }
+   SkipSong(forward){
+      if(forward){
+         let cr=(this.state.currentIndex==this.props.trackList.trackList.length-1)?0:(this.state.currentIndex+1);
+
+         this.setState({
+            currentIndex: cr
+         });
+      }
+      else{
+         let cr=(this.state.currentIndex==0)?(this.props.trackList.trackList.length-1):(this.state.currentIndex-1);
+
+         this.setState({
+            currentIndex: cr
+         });
+      }
+      // this.updateMeta();
+      this.setState({
+         currentSong: this.props.trackList.trackList[this.state.currentIndex],
+      })
+      window.SetAudio(this.state.currentSong.src);
+      console.log(this.state.currentSong);
+   }
+   // updateMeta(){
+   //    this.setState({
+   //       currentSong:this.props.trackList.trackList[this.state.currentIndex],
+   //       nextSong:this.props.trackList.trackList[this.state.currentIndex+1],
+   //       prevSong:this.props.trackList.trackList[this.state.currentIndex-1]
+   //    })
+   // }
    changeButton(){
       if(this.state.isPlaying){
          console.log("paused");
@@ -29,17 +71,25 @@ export default class controls extends Component {
       }
    }
    
-   
    render() {
-      
+      console.log(this.state);
+     
       return (
          <div>
             <MusicPlayer>
                <ControlElement className="song-details">
-                  <div className="song-name">Song name</div>
-                  <div className="artist">Artist</div>
+                  <div className="song-name">
+                     {this.state.currentSong.name}
+                  </div>
+                  <div className="artist">
+                     {this.state.currentSong.artist}
+                  </div>
                </ControlElement>
-               <ControlElement className="prev" >
+               <ControlElement className="prev" onClick={()=>{
+                  this.SkipSong(false);
+                  console.log(this.state.currentSong.src);
+                  // window.SetAudio(this.state.currentSong.src);
+               }}>
                   <div className="fontawesome-icon">
                      <FontAwesomeIcon icon={faStepBackward} ></FontAwesomeIcon>
                   </div>
@@ -50,7 +100,11 @@ export default class controls extends Component {
                   </div>
                   
                </ControlElement>
-               <ControlElement className="next"  >
+               <ControlElement className="next" onClick={()=>{
+                  this.SkipSong(true);
+                  console.log(this.state.currentSong.src);
+                  // window.SetAudio(this.state.currentSong.src);
+               }}>
                   <div className="fontawesome-icon">
                   <FontAwesomeIcon icon={faStepForward} ></FontAwesomeIcon>
                   </div>

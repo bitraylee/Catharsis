@@ -56,19 +56,30 @@
 
 <script>
    var isPlaying = false,
-      setFLag = true;
+      setFLag = true,
+      audio = null;
+   // const getIsPlaying = function () {
    function getIsPlaying() {
       return isPlaying;
    }
+   // const setPlayPause = function (val) {
    function setPlayPause(val) {
       isPlaying = val;
    }
+   function SetAudio(audio_src) {
+      audio.src = audio_src;
+      if (isPlaying) {
+         audio.pause;
+         audio.play;
+      }
+   }
+   // const startVisualizer = function (AUDIO_URL) {
    function startVisualizer(AUDIO_URL) {
       var TOTAL_BANDS,
          analyser,
          analyserDataArray,
          arrCircles,
-         audio,
+         // audio,
          build,
          buildCircles,
          canplay,

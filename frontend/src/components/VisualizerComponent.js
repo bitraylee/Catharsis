@@ -3,7 +3,7 @@ import React, { Component, useEffect } from 'react'
 
 export default function VisualizerComponent(props) {   
    useEffect(()=>{
-      window.startVisualizer(props.AUDIO_URL);
+      window.startVisualizer(props.audio_url);
    });
    return (
       <div>

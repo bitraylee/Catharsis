@@ -11,7 +11,7 @@ function App() {
    return (
       <div className="App">
          <Background></Background>
-         <VisualizerComponent AUDIO_URL="./music/Lucky_Ones.mp3"></VisualizerComponent>
+         <VisualizerComponent audio_url="./music/Beethoven - Moonlight Sonata (1st Movement).mp3"></VisualizerComponent>
       </div>
    );
 }
