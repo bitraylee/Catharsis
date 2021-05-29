@@ -1,4 +1,4 @@
-const Sentiment = require('sentiment');
+const Sentiment = require("sentiment");
 const sentiment = new Sentiment();
 
 // random (get random line from file)
@@ -19,23 +19,23 @@ const getQuote = function (quotes, comparative_score = null) {
             return { quote: quotes[i], score: s.comparative };
         }
     }
-}
+};
 
 const getSentiment = function (line) {
     var result = sentiment.analyze(line);
     return { comparative: result.comparative, score: result.score };
-}
+};
 
-const avg = function (like, dislike) {
-    let lsum = 0;
-    let dsum = 0;
-    like.forEach(e => {
-        lsum += e;
-    });
-    dislike.forEach(e => {
-        dsum += e;
-    });
-    return (lsum - dsum) / 2;
-}
+// const avg = function (like, dislike) {
+//     let lsum = 0;
+//     let dsum = 0;
+//     like.forEach(e => {
+//         lsum += e;
+//     });
+//     dislike.forEach(e => {
+//         dsum += e;
+//     });
+//     return (lsum - dsum) / 2;
+// }
 
-module.exports = { getQuote, getSentiment, avg };
+module.exports = { getQuote, getSentiment };
