@@ -113,7 +113,6 @@ export default class controls extends Component {
                   <div className="fontawesome-icon">
                      <FontAwesomeIcon icon={faList}></FontAwesomeIcon>
                   </div>
-                  
                </ControlElement>
             </MusicPlayer>
          </div>

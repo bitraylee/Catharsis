@@ -1,4 +1,5 @@
 import React from 'react'
+import { render } from 'react-dom';
 import styled from 'styled-components'
 // import AudioVisualizer from './AudioVisualizer';
 import Controls from './Controls';
@@ -41,6 +42,11 @@ export default function Background() {
       artist: "Lana Del Ray",
       src:"./music/Lucky_Ones.mp3"
    }];
+
+   
+   
+   
+   
    return (
       <BackgroundLayer>
          <QuoteCard className="quote-card"></QuoteCard>
