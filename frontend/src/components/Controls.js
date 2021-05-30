@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay, faPause, faStepBackward, faStepForward, faList } from '@fortawesome/free-solid-svg-icons'
@@ -17,7 +16,10 @@ export default class controls extends Component {
          currentSong:this.props.trackList.trackList[0],
          // nextSong:this.props.trackList.trackList[2],
          // prevSong:this.props.trackList.trackList[0]
+         songList:this.props.trackList.trackList,
+         // songList:["song1","song2","song3"],
       };
+      // console.log(this.state.songList);
       this.changeButton=this.changeButton.bind(this);
       this.SkipSong=this.SkipSong.bind(this);
       // this.updateMeta=this.updateMeta.bind(this);
@@ -30,26 +32,16 @@ export default class controls extends Component {
    //    console.log("update  Meta");
    // }
    SkipSong(forward){
+      let ci=0;
       if(forward){
-         let cr=(this.state.currentIndex==this.props.trackList.trackList.length-1)?0:(this.state.currentIndex+1);
-
-         this.setState({
-            currentIndex: cr
-         });
+         ci=(this.state.currentIndex===this.state.songList.length-1)?0:this.state.currentIndex+1;
+      }else{
+         ci=(this.state.currentIndex===0)?this.state.songList.length-1:this.state.currentIndex-1;
       }
-      else{
-         let cr=(this.state.currentIndex==0)?(this.props.trackList.trackList.length-1):(this.state.currentIndex-1);
-
-         this.setState({
-            currentIndex: cr
-         });
-      }
-      // this.updateMeta();
       this.setState({
-         currentSong: this.props.trackList.trackList[this.state.currentIndex],
-      })
-      window.SetAudio(this.state.currentSong.src);
-      console.log(this.state.currentSong);
+         currentIndex:  ci,
+         currentSong: this.state.songList[ci],
+      });
    }
    // updateMeta(){
    //    this.setState({
@@ -60,12 +52,10 @@ export default class controls extends Component {
    // }
    changeButton(){
       if(this.state.isPlaying){
-         console.log("paused");
          this.setState({isPlaying:false});
          window.setPlayPause(false);
       }
       else{
-         console.log("playing");
          this.setState({isPlaying:true});
          window.setPlayPause(true);
       }
@@ -73,7 +63,6 @@ export default class controls extends Component {
    
    render() {
       console.log(this.state);
-     
       return (
          <div>
             <MusicPlayer>
@@ -85,10 +74,10 @@ export default class controls extends Component {
                      {this.state.currentSong.artist}
                   </div>
                </ControlElement>
-               <ControlElement className="prev" onClick={()=>{
+               <ControlElement className="prev" onClick={async ()=>{
                   this.SkipSong(false);
-                  console.log(this.state.currentSong.src);
-                  // window.SetAudio(this.state.currentSong.src);
+                  await window.SetAudio(this.state.currentSong.src);
+                  this.changeButton();
                }}>
                   <div className="fontawesome-icon">
                      <FontAwesomeIcon icon={faStepBackward} ></FontAwesomeIcon>
@@ -100,10 +89,10 @@ export default class controls extends Component {
                   </div>
                   
                </ControlElement>
-               <ControlElement className="next" onClick={()=>{
+               <ControlElement className="next" onClick={async ()=>{
                   this.SkipSong(true);
-                  console.log(this.state.currentSong.src);
-                  // window.SetAudio(this.state.currentSong.src);
+                  await window.SetAudio(this.state.currentSong.src);
+                  this.changeButton();
                }}>
                   <div className="fontawesome-icon">
                   <FontAwesomeIcon icon={faStepForward} ></FontAwesomeIcon>
