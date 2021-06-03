@@ -6,16 +6,15 @@ const getQuote = function (quotes, comparative_score = null) {
     let l = quotes.length;
     let i = Math.floor(Math.random(0) * l);
     if (comparative_score == null) {
-        // get random line and send
+        // get random line
         return quotes[i];
     }
-    // get quote based on comparative_score and end
+    // get quote based on comparative_score
     while (1) {
         let s = getSentiment(quotes[i]);
         i = Math.floor(Math.random(0) * l);
         let diff = Math.abs(s.comparative) - Math.abs(comparative_score);
-        if (Math.abs(diff) <= 0.02) {
-            console.log(quotes[i]);
+        if (Math.abs(diff) <= 0.05) {
             return { quote: quotes[i], score: s.comparative };
         }
     }
