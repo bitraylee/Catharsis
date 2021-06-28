@@ -24,8 +24,8 @@ app.get("/quote", (req, res) => {
 app.get("/quote/:action", (req, res) => {
     const action = req.params.action;
     const score = +req.query.s || -0.01;
-    let x = 0,
-        prev = 0;
+    let x = 0;
+    let prev = 0;
     if (action !== "left") {
         // liked += score;
         // count += 1;
@@ -35,8 +35,8 @@ app.get("/quote/:action", (req, res) => {
         x = prev;
     }
     // let x = liked/count;
-    console.log({ action, score, x });
     let newquote = getQuote(quotes, x);
+    console.log(newquote);
     res.send(newquote);
 });
 
